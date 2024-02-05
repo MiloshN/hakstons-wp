@@ -168,6 +168,7 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/api/homepage/index.php';
 
 /**
  * Load Jetpack compatibility file.
