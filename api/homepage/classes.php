@@ -57,4 +57,14 @@
             $this->articles = $articles;
         }
     }
+
+    class Featured_Press_Section{
+        public $label;
+        public $press_arr;
+
+        public function __construct($label, $press_arr){
+            $this->label = $label;
+            $this->press_arr = $press_arr;
+        }
+    }
 ?>

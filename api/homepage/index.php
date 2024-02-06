@@ -114,6 +114,25 @@ function homepage_api($request) {
         $featured_articles = new Featured_Articles($featured_articles_label, $featured_articles_list);
 
 
+        $featured_press_label = get_field('press_label', $homepage_id);
+        $featured_press_arr = array();
+        $repeater = have_rows('single_press', $homepage_id);
+
+         if(have_rows('single_press', $homepage_id)){
+             while(have_rows('single_press', $homepage_id)){
+                the_row();
+                 $logo = get_sub_field('single_press_logo');
+                 $text = get_sub_field('single_press_text');
+                 $url = get_sub_field('singe_press_link');
+                
+                 $featured_press_arr[] = array(
+                     'logo' => $logo,
+                     'text' => $text,
+                     'url' => $url
+                 );
+             }  
+         }
+
         //
 
 
@@ -126,7 +145,8 @@ function homepage_api($request) {
             'featured_events' => $featured_events_arr,
             'featured_whisky' => $featured_whisky,
             'cta_banner' => $cta_banner_label,
-            'latest_articles' => $featured_articles
+            'latest_articles' => $featured_articles,
+            'featured_press' => new Featured_Press_Section($featured_press_label, $featured_press_arr)
         );
 
         $response = new WP_REST_Response($data);
