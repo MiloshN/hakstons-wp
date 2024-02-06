@@ -132,7 +132,7 @@ require 'classes.php';
                 the_row();
                  $logo = get_sub_field('single_press_logo');
                  $text = get_sub_field('single_press_text');
-                 $url = get_sub_field('singe_press_link');
+                 $url = get_sub_field('press_article_link');
                 
                  $featured_press_arr[] = array(
                      'logo' => $logo,
