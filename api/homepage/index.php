@@ -6,6 +6,7 @@ function homepage_api($request) {
 
     if ($homepage_id) {
 
+        $homepage_title = get_the_title($homepage_id);
         $hero_slides = get_hero_slides($homepage_id);
         $intro = get_field('intro_section', $homepage_id);   
         $latest_products = get_latest_products($homepage_id);
@@ -16,18 +17,18 @@ function homepage_api($request) {
         $featured_press = get_featured_press($homepage_id);
         //
 
-        $data = array(
-            'message' => 'Custom endpoint for homepage works!',
-            'homepage_id' => $homepage_id,
-            'hero_slides' => $hero_slides,
-            'intro' => $intro,
-            'latest_products' => $latest_products,
-            'featured_events' => $featured_events_arr,
-            'featured_whisky' => $featured_whisky,
-            'cta_banner' => $cta_banner_label,
-            'latest_articles' => $featured_articles,
-            'featured_press' => $featured_press
-        );
+        $data =array(    
+            'data' => array(
+                'homepage_title' => $homepage_title,
+                'hero_slides' => $hero_slides,
+                'intro' => $intro,
+                'latest_products' => $latest_products,
+                'featured_events' => $featured_events_arr,
+                'featured_whisky' => $featured_whisky,
+                'cta_banner' => $cta_banner_label,
+                'latest_articles' => $featured_articles,
+                'featured_press' => $featured_press
+            ));
 
         $response = new WP_REST_Response($data);
         $response->set_status(200);
