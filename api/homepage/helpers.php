@@ -11,11 +11,11 @@ require 'classes.php';
                 $title = $product['title'];
                 $description = $product['description'];
                 $image = $product['image'];
-                $distilery = get_field('distilery', $whisky_id);
+                $distillery = get_field('distilery', $whisky_id);
                 $bottling_date = get_field('bottling_date', $whisky_id);
                 $price_per_bottle = get_field('price_per_bottle', $whisky_id);
 
-                $featured_whisky_arr[] = new Featured_Whisky($title, $description, $image, $distilery, $bottling_date, $price_per_bottle);
+                $featured_whisky_arr[] = new Featured_Whisky($title, $description, $image, $distillery, $bottling_date, $price_per_bottle);
             }
             
             $label = get_field('featured_whisky_label', $page_id);
