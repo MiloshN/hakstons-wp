@@ -11,11 +11,12 @@ require 'classes.php';
                 $title = $product['title'];
                 $description = $product['description'];
                 $image = $product['image'];
+                $currency = $product['currency'];
                 $distillery = get_field('distilery', $whisky_id);
                 $bottling_date = get_field('bottling_date', $whisky_id);
                 $price_per_bottle = get_field('price_per_bottle', $whisky_id);
 
-                $featured_whisky_arr[] = new Featured_Whisky($title, $description, $image, $distillery, $bottling_date, $price_per_bottle);
+                $featured_whisky_arr[] = new Featured_Whisky($title, $description, $image, $currency, $distillery, $bottling_date, $price_per_bottle);
             }
             
             $label = get_field('featured_whisky_label', $page_id);
@@ -143,6 +144,22 @@ require 'classes.php';
          }
 
          return new Featured_Press_Section($featured_press_label, $featured_press_arr);
+
+    }
+
+
+    function get_cta_banner($page_id){
+        $cta_banner = get_field('cta_label',$page_id);
+        $cta_img = $cta_banner['logo'];
+
+        return array(
+            'heading' => $cta_banner['heading'],
+            'text' => $cta_banner['text'],
+            'logo' => array(
+                'url' => $cta_img['url'],
+                'alt' => $cta_img['alt']
+            )            
+        );
 
     }
 ?>

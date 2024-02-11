@@ -24,14 +24,16 @@
         public $title;
         public $description;
         public $image;
+        public $currency;
         public $distillery;
         public $bottling_date;
         public $price_per_bottle;
 
-        public function __construct($title, $description, $image, $distillery, $bottling_date, $price_per_bottle){
+        public function __construct($title, $description, $image,$currency, $distillery, $bottling_date, $price_per_bottle){
             $this->title = $title;
             $this->description = $description;
             $this->image = $image;
+            $this->currency = $currency;
             $this->distillery = $distillery;
             $this->bottling_date = $bottling_date;
             $this->price_per_bottle = $price_per_bottle;
