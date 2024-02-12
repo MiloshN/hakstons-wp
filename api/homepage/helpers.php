@@ -110,13 +110,29 @@ require 'classes.php';
         if ( $blog_query->have_posts() ) {
             while ( $blog_query->have_posts() ) {
                 $blog_query->the_post();
-                
-                $featured_articles_list[] = array(
-                    'title' => get_the_title(),
-                    'desc' => get_the_excerpt(),
-                );
-            }
-            wp_reset_postdata();
+            $post_id = get_the_ID();
+            $category_list = get_the_category($post_id);
+            $categories = array();
+
+            if ($category_list) {
+                foreach ($category_list as $category) {
+                    $categories[] = array(
+                        'cat_name' => $category->name
+                    );
+                }
+            };
+            
+            $featured_articles_list[] = array(
+                'categories' => $categories,
+                'date'  => get_the_date('F j, Y', $post_id),
+                'title' => get_the_title(),
+                'desc'  => get_the_excerpt(),
+                 'img'   => array(
+                     'url' => get_the_post_thumbnail_url($post_id, 'full'),
+                 )
+            );
+        }
+        wp_reset_postdata();
         } else {
             echo 'No articles found';
         }
@@ -132,13 +148,16 @@ require 'classes.php';
              while(have_rows('single_press', $page_id)){
                 the_row();
                  $logo = get_sub_field('single_press_logo');
-                 $text = get_sub_field('single_press_text');
-                 $url = get_sub_field('press_article_link');
+                 $title = get_sub_field('single_press_title');
+                 $link = get_sub_field('press_article_link');
                 
                  $featured_press_arr[] = array(
-                     'logo' => $logo,
-                     'text' => $text,
-                     'url' => $url
+                     'logo' => array(
+                        'url' => $logo['url'],
+                        'alt' => $logo['alt']
+                     ),
+                     'title' => $title,
+                     'link' => $link
                  );
              }  
          }
