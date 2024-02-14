@@ -12,7 +12,6 @@ function homepage_api($request) {
         $latest_products = get_latest_products($homepage_id);
         $featured_events_arr = get_featured_events($homepage_id); 
         $featured_whisky = get_featured_whiskys($homepage_id);
-        //$cta_banner_label = get_field('cta_label',$homepage_id);
         $cta_banner_label = get_cta_banner($homepage_id);       
         $featured_articles = get_featured_articles($homepage_id);
         $featured_press = get_featured_press($homepage_id);

@@ -80,6 +80,7 @@ require 'classes.php';
 
     function get_featured_events($page_id){
         $featured_events = get_field('featured_events', $page_id);
+        $featured_events_heading = get_field('featured_events_heading', $page_id);
         $featured_events_arr = array();
         
         if($featured_events) {
@@ -92,7 +93,10 @@ require 'classes.php';
             }
         }
         
-        return $featured_events_arr;
+        return array(
+            'featured_events_heading' => $featured_events_heading,
+            'featured_events_list' => $featured_events_arr
+        );
     }
 
     function get_featured_articles($page_id){
@@ -134,7 +138,7 @@ require 'classes.php';
         }
         wp_reset_postdata();
         } else {
-            echo 'No articles found';
+            return $categories = 'No categories found.';
         }
 
         return $featured_articles = new Featured_Articles($featured_articles_label, $featured_articles_list);
