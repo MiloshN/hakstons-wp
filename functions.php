@@ -169,6 +169,8 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/api/homepage/index.php';
+require get_template_directory() . '/api/header/index.php';
+
 
 /**
  * Load Jetpack compatibility file.
@@ -206,4 +208,30 @@ function reg_cat() {
 	register_taxonomy_for_object_type('category','events');
 }
 add_action('init', 'reg_cat');
+
+if( function_exists('acf_add_options_page') ) {
+
+	acf_add_options_page(array(
+		'page_title'    => 'Theme General Settings',
+		'menu_title'    => 'Theme Settings',
+		'menu_slug'     => 'theme-general-settings',
+		'capability'    => 'edit_posts',
+		'redirect'      => false,
+		'position'		=> 70,
+		
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title'    => 'Header Settings',
+		'menu_title'    => 'Header',
+		'parent_slug'   => 'theme-general-settings',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title'    => 'Footer Settings',
+		'menu_title'    => 'Footer',
+		'parent_slug'   => 'theme-general-settings',
+	));
+	
+	}
 
