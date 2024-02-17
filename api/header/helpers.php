@@ -26,10 +26,10 @@
         );
     }
 
-    function get_header_menu(){
+    function get_header_menu($menu_name){
         global $URL; 
 
-        $menu_items = wp_get_nav_menu_items('Header menu');
+        $menu_items = wp_get_nav_menu_items($menu_name);
         $new_menu_items = array();
 
         if ($menu_items) {
@@ -48,6 +48,7 @@
             }
             
             return $new_menu_items;
+            //return $menu_items;
         }
 
     }

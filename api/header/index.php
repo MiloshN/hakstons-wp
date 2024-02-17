@@ -5,7 +5,7 @@ require 'helpers.php';
 function header_api($request){
 
 
-    $header_menu = get_header_menu();
+    $header_menu = get_header_menu('Header menu');
     $header_logo = get_header_logo();
     $contact_num = get_contact_num();
     
