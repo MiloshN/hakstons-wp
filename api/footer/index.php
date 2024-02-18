@@ -2,12 +2,16 @@
 
 $globals_route = dirname(__DIR__) . '/globals.php';
 require_once $globals_route;
+require_once 'helpers.php';
 
 function footer_api($request){
     
     $data =array(    
         'data' => array(
-            'menu' => get_menu('')
+            'footer_details' => get_footer_details(),
+            'footer_social_media' => get_social_media(),
+            'footer_company_details' => get_company_details(),
+            'footer_menu' => get_menu('Footer menu')
         ));
 
     $response = new WP_REST_Response($data);
