@@ -168,6 +168,7 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/api/homepage/index.php';
 
 /**
  * Load Jetpack compatibility file.
@@ -175,4 +176,34 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+function hackstons_post_types(){
+	register_post_type('products',array(
+		'public' => true,
+		'labels' => array(
+			'name' => 'Products'
+		),
+		'menu_icon' => 'dashicons-amazon',
+		'menu_position' => 5,
+		'show_in_rest' => true
+	));
+
+	register_post_type('events',array(
+		'public' => true,
+		'labels' => array(
+			'name' => 'Events'
+		),
+		'menu_icon' => 'dashicons-calendar-alt',
+		'menu_position' => 6,
+		'show_in_rest' => true
+	));
+}
+
+add_action('init','hackstons_post_types');
+
+function reg_cat() {
+	register_taxonomy_for_object_type('category','products');
+	register_taxonomy_for_object_type('category','events');
+}
+add_action('init', 'reg_cat');
 
