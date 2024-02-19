@@ -170,6 +170,7 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/api/homepage/index.php';
 require get_template_directory() . '/api/header/index.php';
+require get_template_directory() . '/api/footer/index.php';
 
 
 /**

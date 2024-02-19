@@ -1,11 +1,12 @@
 <?php 
 
+$globals_route = dirname(__DIR__) . '/globals.php';
 require 'helpers.php';
+require $globals_route;
 
 function header_api($request){
 
-
-    $header_menu = get_header_menu('Header menu');
+    $header_menu = get_menu('Header menu');
     $header_logo = get_header_logo();
     $contact_num = get_contact_num();
     
