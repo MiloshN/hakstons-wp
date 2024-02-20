@@ -9,7 +9,6 @@ function header_api($request){
     $header_menu = get_menu('Header menu');
     $header_logo = get_header_logo();
     $contact_num = get_contact_num();
-    
 
     $data =array(    
         'data' => array(
