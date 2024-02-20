@@ -16,6 +16,31 @@ function string_to_slug($string, $separator = '-') {
     return $string;
 }
 
+function get_submenu($menu_items, $menu_id){
+    $sub_menu_array = array();
+    foreach ($menu_items as $menu_item) {
+        $menu_item_title = $menu_item->title;
+        $menu_item_slug = string_to_slug($menu_item_title);
+        $menu_item_link = $menu_item->url;
+        $menu_item_id = $menu_item->ID;
+        $menu_item_parent_id = $menu_item->menu_item_parent;
+
+        if($menu_id == $menu_item_parent_id){
+            $sub_menu_array[] = array(
+                'menu_item_title' => $menu_item->title,
+                'menu_item_slug' => $menu_item_slug,
+                'menu_item_link' => $menu_item_link,
+                'menu_item_id' => $menu_item_id,
+                'menu_item_parent' => $menu_item_parent_id,
+                'target' => $menu_item->target,
+                'sub_menu' => get_submenu($menu_items, $menu_item_id)
+            );
+        }
+    }
+
+    return $sub_menu_array;
+}
+
 function get_menu($menu_name){
     global $URL; 
 
@@ -28,13 +53,21 @@ function get_menu($menu_name){
 
             $menu_item_title = $menu_item->title;
             $menu_item_slug = string_to_slug($menu_item_title);
-            $menu_item_link = $URL . '/' . $menu_item_slug;
+            $menu_item_link = $menu_item->url;
+            $menu_item_id = $menu_item->ID;
+            $menu_item_parent_id = $menu_item->menu_item_parent;
 
-            $new_menu_items[] = array(
+            if($menu_item_parent_id == 0)
+            {$new_menu_items[] = array(
                 'menu_item_title' => $menu_item->title,
                 'menu_item_slug' => $menu_item_slug,
                 'menu_item_link' => $menu_item_link,
-            );   
+                'menu_item_id' => $menu_item_id,
+                'menu_item_parent' => $menu_item_parent_id,
+                'target' => $menu_item->target,
+                'sub_menu' => get_submenu($menu_items, $menu_item_id)
+            ); 
+            }    
         }
         
         return $new_menu_items;
