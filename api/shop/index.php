@@ -80,7 +80,7 @@ function shop_api($request){
     $last_page_url = construct_url($total_pages, $per_page, $category_filter);
     $first_page_url = construct_url(1, $per_page, $category_filter);
     
-    $data = array(
+    $data = array(  
         'category_filter' => $category_filter,
         'per_page' => $per_page,
         'current_page' => $page,
@@ -107,5 +107,32 @@ add_action('rest_api_init', function () {
         'callback' => 'shop_api',
     ));
 });
+
+function shop_page($request){
+    
+    $data = array(  
+        'data' => array(
+            'hero_slides' => get_hero_slides_global(244),
+            'cta_banner' => get_cta_banner_global(244)
+        )
+    );
+
+    $response = new WP_REST_Response($data);
+    $response->set_status(200);
+
+    return $response;
+}
+
+
+add_action('rest_api_init', function () {
+    register_rest_route('myApi/v1', '/shop-page', array(
+        'methods' => 'GET',
+        'callback' => 'shop_page',
+    ));
+});
+
+
+
+
 
 ?>

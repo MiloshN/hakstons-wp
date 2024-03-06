@@ -76,4 +76,40 @@ function get_menu($menu_name){
 
 }
 
+function get_hero_slides_global($page_id){
+    $hero_slides = array();
+
+    if (have_rows('hero_section', $page_id)) {
+        while (have_rows('hero_section', $page_id)) {
+            the_row();
+
+            $hero_title = get_sub_field('title');
+            $hero_img_arr = get_sub_field('image');
+            $hero_img_url = $hero_img_arr['url'];
+
+            $hero_slides[] = array(
+                'title' => $hero_title,
+                'image_url' => $hero_img_url,
+            );
+        }
+    }
+
+    return $hero_slides;
+}
+
+function get_cta_banner_global($page_id){
+    $cta_banner = get_field('cta_label',$page_id);
+    $cta_img = $cta_banner['logo'];
+
+    return array(
+        'heading' => $cta_banner['heading'],
+        'text' => $cta_banner['text'],
+        'logo' => array(
+            'url' => $cta_img['url'],
+            'alt' => $cta_img['alt']
+        )            
+    );
+
+}
+
 ?>
