@@ -85,9 +85,7 @@ function shop_api($request){
         'per_page' => $per_page,
         'current_page' => $page,
         'total_pages' => $total_pages,
-        'data' => array(
-            'whisky_products' => get_shop_whisky_products($whisky_products, $per_page, $page)
-        ),
+        'data' => get_shop_whisky_products($whisky_products, $per_page, $page),
         'prev_page_url' => $prev_page_url,
         'next_page_url' => $next_page_url,
         'first_page_url' => $first_page_url,
